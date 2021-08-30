@@ -17,6 +17,8 @@ for i in range(len(student_id_and_major)):
 enrollment_history = pd.read_csv(
     "C:/Users/family/Desktop/Programming/Enrollment Histories/utf_10000_of_enrollment_file_20210827.csv")
 enrollment_history.sort_values(['ID'], inplace=True)
+enrollment_history.replace(to_replace="SPCH",
+                           value="COMM", inplace=True)
 enrollment_history['Class Subject'] = enrollment_history['Class Subject'].str.strip()
 enrollment_history['Class Catalog Number'] = enrollment_history['Class Catalog Number'].str.strip()
 enrollment_history['Course'] = enrollment_history['Class Subject'] + " " + enrollment_history['Class Catalog Number']
@@ -24,6 +26,7 @@ enrollment_history['Class Catalog Number'] = enrollment_history['Class Catalog N
 nona_enrollment_history = enrollment_history[enrollment_history['Official Grade'].notna()]
 nona_enrollment_history = nona_enrollment_history.reset_index(drop=True)
 enrollment_history = nona_enrollment_history
+print(enrollment_history)
 
 # enrollment_history = nona_enrollment_history
 # index_W = enrollment_history[enrollment_history['Official Grade'] == 'W') & enrollment_history['Official Grade'] == 'D'].index
@@ -68,8 +71,19 @@ sorting_PlanB_majors(enrollment_history=enrollment_history, major_name="Business
                      major2='ListA', major2_units=3, major2_disciplines=1,
                      major3='ListB', major3_units=6, major3_disciplines=1)
 sorting_PlanB_majors(enrollment_history=enrollment_history, major_name="LAS: Soc Behavioral Sci-AB",
-                     major_course_requirements='Soc_and_Behav_Sci_AA.csv',
-                     major1='Core', major1_units=18, major1_disciplines=1)
+                     major_course_requirements='Soc_and_Behav_Sci.csv',
+                     major1='Core', major1_units=18, major1_disciplines=3)
+sorting_PlanB_majors(enrollment_history=enrollment_history, major_name="LAS: Self Dev & Soc Beh-AB",
+                     major_course_requirements='Self_Dev_Soc_Behav.csv',
+                     major1="Theory_Background", major1_units=6, major1_disciplines=1,
+                     major2="Stud_Dev_App", major2_units=3, major2_disciplines=1,
+                     major3="Stud_Vit", major3_units=3, major3_disciplines=1)
+sorting_PlanB_majors(enrollment_history=enrollment_history, major_name="LAS: Communications-AB",
+                     major_course_requirements='AS_Comm.csv',
+                     major1='Comm1', major1_units=3, major1_disciplines=1,
+                     major2='Comm2', major2_units=3, major2_disciplines=1,
+                     major3='Crit_Think', major3_units=3, major3_disciplines=1,
+                     major4='Electives', major4_units=9, major4_disciplines=2)
 
 # pd.set_option('display.max_columns', None)
 #
